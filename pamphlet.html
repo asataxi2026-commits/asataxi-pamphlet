@@ -36,8 +36,9 @@
       print-color-adjust: exact;
     }
 
+    /* 入稿用：A4横 297x210mm に塗り足し3mmを加えた 303x216mm */
     @page {
-      size: A4 landscape;
+      size: 303mm 216mm;
       margin: 0;
     }
 
@@ -49,8 +50,8 @@
     }
 
     .page {
-      width: 297mm;
-      height: 210mm;
+      width: 303mm;
+      height: 216mm;
       display: flex;
       position: relative;
       overflow: hidden;
@@ -62,12 +63,13 @@
 
     .panel {
       width: 99mm;
-      height: 210mm;
+      height: 216mm;
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
     }
 
+    /* 折り線：塗り足し3mm分ずらす（102mm, 201mm） */
     .page::after,
     .page::before {
       content: '';
@@ -78,19 +80,24 @@
       border-left: 0.3px dashed #CCC;
       z-index: 100;
     }
-    .page::before { left: 99mm; }
-    .page::after { left: 198mm; }
+    .page::before { left: 102mm; }
+    .page::after { left: 201mm; }
 
     /* ==================== PANEL 1: COVER ==================== */
     .panel-cover {
       display: flex;
       flex-direction: column;
+      /* 塗り足し対応：下3mmをセーフゾーンとして確保（塗り足し分は .page-outside .panel-cover で追加） */
     }
+
+    /* 塗り足し対応：表紙下部のセーフゾーン */
+    .page-outside .panel-cover { padding-bottom: 3mm; }
 
     .cover-photo {
       position: relative;
       width: 100%;
-      height: 78mm;
+      /* 塗り足し対応：上3mmの塗り足し分を含めて 78 → 81mm */
+      height: 81mm;
       overflow: hidden;
     }
 
@@ -240,11 +247,17 @@
     .panel-flap {
       display: flex;
       flex-direction: column;
-      padding: 3mm;
+      padding: 6mm 3mm;
     }
 
-    /* プリンタの印刷不可領域を避けるため、外側端のパネルは外側に余白を多めに確保 */
+    /* 塗り足し対応：外側端のパネルは 3mm 広げて 102mm にする */
     /* Page 1 outside: [back | flap | cover], Page 2 inside: [services | pricing | flow] */
+    .page-outside .panel-back,
+    .page-outside .panel-cover,
+    .page-inside .panel-services,
+    .page-inside .panel-flow { width: 102mm; }
+
+    /* 外側端のコンテンツは「塗り足し3mm + セーフゾーン3mm = 6mm」内側に配置 */
     .page-outside .panel-back { padding-left: 6mm; }
     .page-inside .panel-services { padding-left: 6mm; }
     .page-outside .panel-cover .cover-body,
@@ -408,7 +421,7 @@
     .panel-back {
       display: flex;
       flex-direction: column;
-      padding: 3mm;
+      padding: 6mm 3mm;
     }
 
     .back-header {
@@ -560,7 +573,7 @@
     .panel-services {
       display: flex;
       flex-direction: column;
-      padding: 3mm;
+      padding: 6mm 3mm;
     }
 
     .section-header {
@@ -700,7 +713,7 @@
     .panel-pricing {
       display: flex;
       flex-direction: column;
-      padding: 3mm;
+      padding: 6mm 3mm;
     }
 
     .pricing-note {
@@ -800,7 +813,7 @@
     .panel-flow {
       display: flex;
       flex-direction: column;
-      padding: 3mm;
+      padding: 6mm 3mm;
     }
 
     .flow-steps {
@@ -966,7 +979,7 @@
 
     /* ==================== PRINT INSTRUCTIONS ==================== */
     .print-instructions {
-      width: 297mm;
+      width: 303mm;
       margin: 5mm auto;
       padding: 5mm;
       background: #FFF9E6;
