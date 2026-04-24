@@ -33,40 +33,43 @@
       background: #eee;
     }
 
+    /* 入稿用：A4縦 210x297mm に塗り足し3mmを加えた 216x303mm */
     @page {
-      size: A4 portrait;
+      size: 216mm 303mm;
       margin: 0;
     }
 
-    html, body { width: 210mm; margin: 0; padding: 0; }
+    html, body { width: 216mm; margin: 0; padding: 0; }
 
     @media print {
       html, body {
         margin: 0 !important;
         padding: 0 !important;
         background: #fff !important;
-        width: 210mm !important;
-        height: 297mm !important;
+        width: 216mm !important;
+        height: 303mm !important;
         overflow: hidden !important;
       }
       .sheet {
         box-shadow: none !important;
         margin: 0 !important;
-        padding: 6mm 10mm !important;
+        /* 塗り足し3mm + 元パディング6mm/10mm = 9mm/13mm でセーフゾーン維持 */
+        padding: 9mm 13mm !important;
         page-break-after: avoid !important;
         break-after: avoid !important;
       }
     }
 
     .sheet {
-      width: 210mm;
-      height: 297mm;
+      width: 216mm;
+      height: 303mm;
       background: var(--white);
       margin: 10mm auto;
       box-shadow: 0 6px 24px rgba(0,0,0,0.12);
       position: relative;
       overflow: hidden;
-      padding: 7mm 10mm;
+      /* 塗り足し3mm + 元パディング7mm/10mm = 10mm/13mm */
+      padding: 10mm 13mm;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
