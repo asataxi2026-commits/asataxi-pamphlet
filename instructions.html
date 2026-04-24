@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あさタクシー パンフレット 印刷・配布の手順書</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #F5811F;
+      --orange-light: #FFF3E8;
+      --orange-dark: #D96B0C;
+      --green-dark: #1B6B3B;
+      --green-line: #06C755;
+      --green-light: #E8F5E9;
+      --text-dark: #2C2C2C;
+      --text-medium: #4A4A4A;
+      --text-light: #777777;
+      --bg-light: #FAFAFA;
+      --white: #FFFFFF;
+      --border: #E0E0E0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-dark);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: #eee;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    html, body { width: 210mm; margin: 0; padding: 0; }
+
+    @media print {
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        overflow: hidden !important;
+      }
+      .sheet {
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 6mm 10mm !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+    }
+
+    .sheet {
+      width: 210mm;
+      height: 297mm;
+      background: var(--white);
+      margin: 10mm auto;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+      padding: 7mm 10mm;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    /* ==================== HEADER ==================== */
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      gap: 5mm;
+      padding-bottom: 3mm;
+      border-bottom: 0.4mm solid var(--orange);
+      margin-bottom: 4mm;
+    }
+
+    .sheet-logo img {
+      width: 28mm;
+      height: auto;
+      display: block;
+    }
+
+    .sheet-title-wrap { flex: 1; }
+
+    .sheet-title-en {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.15em;
+    }
+
+    .sheet-title {
+      font-size: 16pt;
+      font-weight: 900;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-top: 0.5mm;
+    }
+
+    .sheet-audience {
+      font-size: 9pt;
+      color: var(--text-medium);
+      text-align: right;
+      line-height: 1.6;
+      padding-left: 4mm;
+      border-left: 0.3mm solid var(--border);
+    }
+
+    .sheet-audience strong {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* ==================== LEAD ==================== */
+    .sheet-lead {
+      font-size: 10pt;
+      color: var(--text-medium);
+      line-height: 1.5;
+      margin-bottom: 3mm;
+    }
+
+    .sheet-lead strong { color: var(--text-dark); font-weight: 700; }
+
+    /* ==================== STEP ==================== */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5mm;
+    }
+
+    .step {
+      display: flex;
+      gap: 3mm;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 9mm;
+      height: 9mm;
+      border-radius: 50%;
+      background: var(--orange);
+      color: white;
+      font-size: 12pt;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-body {
+      flex: 1;
+      padding-top: 0.2mm;
+    }
+
+    .step-title {
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.2mm;
+      line-height: 1.3;
+    }
+
+    .step-title small {
+      display: inline-block;
+      font-size: 9pt;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-left: 2mm;
+    }
+
+    /* ==================== STEP 1: DOWNLOAD ==================== */
+    .download-panel {
+      display: flex;
+      gap: 4mm;
+      align-items: center;
+      background: var(--orange-light);
+      border-radius: 2mm;
+      padding: 2.5mm 3.5mm;
+    }
+
+    .download-intro {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .download-info-head {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.4;
+      margin-bottom: 1.2mm;
+    }
+
+    .download-info-head .peace {
+      color: var(--orange);
+      font-weight: 900;
+      margin-left: 1.5mm;
+    }
+
+    .download-info-sub {
+      font-size: 9pt;
+      color: var(--text-medium);
+      line-height: 1.55;
+    }
+
+    .download-info-sub strong { color: var(--orange-dark); font-weight: 700; }
+
+    .download-qr-set {
+      display: flex;
+      gap: 2.5mm;
+      flex-shrink: 0;
+    }
+
+    .download-qr-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 28mm;
+    }
+
+    .download-qr-image {
+      width: 28mm;
+      height: 28mm;
+      background: white;
+      border: 0.3mm solid var(--border);
+      border-radius: 1.2mm;
+      padding: 0.6mm;
+      flex-shrink: 0;
+    }
+
+    .download-qr-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .download-qr-label {
+      text-align: center;
+      margin-top: 1mm;
+      line-height: 1.2;
+    }
+
+    .download-qr-label-main {
+      font-size: 8pt;
+      font-weight: 900;
+      color: var(--text-dark);
+    }
+
+    .download-qr-label-sub {
+      font-size: 6.5pt;
+      color: var(--text-light);
+      margin-top: 0.2mm;
+    }
+
+    /* ==================== STEP 2: PRINT ==================== */
+    .print-settings-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2mm;
+      margin-top: 1mm;
+    }
+
+    .print-setting {
+      background: var(--bg-light);
+      border: 0.3mm solid var(--border);
+      border-radius: 1.5mm;
+      padding: 2mm 2mm;
+      text-align: center;
+    }
+
+    .print-setting-label {
+      font-size: 8pt;
+      color: var(--text-light);
+      margin-bottom: 1mm;
+    }
+
+    .print-setting-value {
+      font-size: 11pt;
+      font-weight: 900;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .print-setting-value small {
+      display: block;
+      font-size: 7pt;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-top: 0.5mm;
+    }
+
+    .print-setting.accent {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .print-setting.accent .print-setting-label { color: rgba(255,255,255,0.85); }
+    .print-setting.accent .print-setting-value { color: white; }
+    .print-setting.accent .print-setting-value small { color: rgba(255,255,255,0.85); }
+
+    .print-hint {
+      font-size: 8.5pt;
+      color: var(--text-medium);
+      margin-top: 1.5mm;
+      padding: 1.5mm 2.5mm;
+      background: #FFF9E6;
+      border-left: 0.8mm solid #FFB300;
+      border-radius: 0 1mm 1mm 0;
+      line-height: 1.5;
+    }
+
+    .print-hint strong { color: #C67100; font-weight: 700; }
+
+    /* ==================== STEP 3: FOLD ==================== */
+    .fold-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3mm;
+      background: var(--bg-light);
+      border-radius: 2mm;
+      padding: 2mm;
+      margin-top: 0.8mm;
+    }
+
+    .fold-paper {
+      width: 50mm;
+      height: 34mm;
+      background: white;
+      border: 0.4mm solid var(--border);
+      border-radius: 1mm;
+      display: flex;
+      flex-shrink: 0;
+      box-shadow: 0 1mm 2mm rgba(0,0,0,0.08);
+    }
+
+    .fold-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1mm;
+      line-height: 1.3;
+    }
+
+    .fold-panel + .fold-panel { border-left: 0.3mm dashed var(--orange); }
+
+    .fold-panel-num {
+      font-size: 11pt;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .fold-panel-label {
+      font-size: 7.5pt;
+      color: var(--text-medium);
+      font-weight: 700;
+      margin-top: 0.5mm;
+    }
+
+    .fold-panel-sub {
+      font-size: 6pt;
+      color: var(--text-light);
+      margin-top: 0.3mm;
+    }
+
+    .fold-arrow {
+      font-size: 16pt;
+      color: var(--orange);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .fold-result {
+      width: 18mm;
+      height: 34mm;
+      background: var(--orange-light);
+      border: 0.4mm solid var(--orange);
+      border-radius: 1mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1mm;
+      flex-shrink: 0;
+    }
+
+    .fold-result-title {
+      font-size: 8pt;
+      font-weight: 900;
+      color: var(--orange-dark);
+      line-height: 1.3;
+    }
+
+    .fold-result-sub {
+      font-size: 6.5pt;
+      color: var(--orange-dark);
+      margin-top: 0.8mm;
+      line-height: 1.3;
+    }
+
+    .fold-caption {
+      font-size: 8.5pt;
+      color: var(--text-medium);
+      margin-top: 1.5mm;
+      line-height: 1.5;
+    }
+
+    .fold-caption strong { color: var(--text-dark); font-weight: 700; }
+
+    /* ==================== USECASES: 配布シーン ==================== */
+    .usecases {
+      margin-top: 4mm;
+      background: linear-gradient(135deg, #F4FBF7, #E8F5EE);
+      border: 0.3mm solid #B9DBC7;
+      border-radius: 2mm;
+      padding: 3mm 4mm 3.5mm;
+    }
+
+    .usecases-header {
+      display: flex;
+      align-items: baseline;
+      gap: 2.5mm;
+      margin-bottom: 2.5mm;
+    }
+
+    .usecases-title {
+      font-size: 11pt;
+      font-weight: 900;
+      color: var(--green-dark);
+      letter-spacing: 0.02em;
+    }
+
+    .usecases-title::before {
+      content: '💡';
+      margin-right: 1mm;
+    }
+
+    .usecases-lead {
+      font-size: 8.5pt;
+      color: var(--text-medium);
+      line-height: 1.5;
+    }
+
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5mm;
+    }
+
+    .usecase-item {
+      background: white;
+      border-radius: 1.5mm;
+      padding: 2.5mm 2mm;
+      text-align: center;
+      border-top: 0.8mm solid var(--orange);
+      box-shadow: 0 0.3mm 1mm rgba(0,0,0,0.04);
+    }
+
+    .usecase-icon {
+      font-size: 14pt;
+      line-height: 1;
+      margin-bottom: 1.2mm;
+    }
+
+    .usecase-title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-bottom: 0.8mm;
+    }
+
+    .usecase-desc {
+      font-size: 7pt;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    /* ==================== FOOTER ==================== */
+    .sheet-footer {
+      margin-top: 3mm;
+      padding-top: 2.5mm;
+      border-top: 0.3mm solid var(--border);
+    }
+
+    .footer-contact {
+      background: var(--green-dark);
+      color: white;
+      border-radius: 2mm;
+      padding: 2.5mm 4mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3mm;
+    }
+
+    .footer-contact-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+
+    .footer-contact-phone {
+      font-size: 15pt;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-top: 0.3mm;
+    }
+
+    .footer-contact-hours {
+      font-size: 7.5pt;
+      opacity: 0.88;
+      margin-top: 0.3mm;
+    }
+
+    .footer-line {
+      background: var(--green-line);
+      border-radius: 1.5mm;
+      padding: 2mm 3mm;
+      text-align: center;
+    }
+
+    .footer-line-label { font-size: 8pt; }
+    .footer-line-value { font-size: 11pt; font-weight: 900; margin-top: 0.3mm; }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.5pt;
+      color: var(--text-light);
+      margin-top: 1.5mm;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <header class="sheet-header">
+    <div class="sheet-logo">
+      <img src="images/logo-full.png" alt="あさタクシー">
+    </div>
+    <div class="sheet-title-wrap">
+      <div class="sheet-title-en">HOW&nbsp;TO&nbsp;PRINT&nbsp;&amp;&nbsp;FOLD</div>
+      <h1 class="sheet-title">パンフレット 印刷・配布の手順書</h1>
+    </div>
+    <div class="sheet-audience">
+      <strong>ケアマネ様<br>MSW様 向け</strong>
+    </div>
+  </header>
+
+  <!-- LEAD -->
+  <p class="sheet-lead">
+    ご担当のご利用者様・ご家族様へ<strong>あさタクシーのパンフレットをお渡しいただく際</strong>の手順です。事業所のプリンターでご印刷いただき、三つ折りにしてご自由に配布ください。
+  </p>
+
+  <!-- STEPS -->
+  <div class="steps">
+
+    <!-- STEP 1: DOWNLOAD -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">パンフレットPDFをダウンロード<small>QRコードをスマホで読み取ってください</small></div>
+        <div class="download-panel">
+          <div class="download-intro">
+            <div class="download-info-head">こちらから配布用のパンフレットをダウンロードできますよ<span class="peace">✌</span></div>
+            <div class="download-info-sub">
+              QRを読み取ると <strong>pamphlet.pdf</strong> が表示されます。お手元のPCへ保存し、Step 2 の設定で印刷してください。
+            </div>
+          </div>
+          <div class="download-qr-set">
+            <div class="download-qr-item">
+              <div class="download-qr-image">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=4&ecc=H&data=https%3A%2F%2Fasataxi2026-commits.github.io%2Fasataxi-pamphlet%2Fpamphlet.pdf" alt="パンフレットPDF QRコード">
+              </div>
+              <div class="download-qr-label">
+                <div class="download-qr-label-main">パンフレット</div>
+                <div class="download-qr-label-sub">PDF ダウンロード</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: PRINT -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">A4カラーで両面印刷<small>Ctrl + P で印刷画面を表示</small></div>
+        <div class="print-settings-grid">
+          <div class="print-setting">
+            <div class="print-setting-label">用紙</div>
+            <div class="print-setting-value">A4</div>
+          </div>
+          <div class="print-setting">
+            <div class="print-setting-label">向き</div>
+            <div class="print-setting-value">横</div>
+          </div>
+          <div class="print-setting accent">
+            <div class="print-setting-label">両面</div>
+            <div class="print-setting-value">短辺とじ<small>※長辺NG</small></div>
+          </div>
+          <div class="print-setting">
+            <div class="print-setting-label">カラー</div>
+            <div class="print-setting-value">カラー</div>
+          </div>
+          <div class="print-setting">
+            <div class="print-setting-label">余白</div>
+            <div class="print-setting-value">なし</div>
+          </div>
+          <div class="print-setting">
+            <div class="print-setting-label">倍率</div>
+            <div class="print-setting-value">100%</div>
+          </div>
+          <div class="print-setting">
+            <div class="print-setting-label">背景</div>
+            <div class="print-setting-value">ON</div>
+          </div>
+          <div class="print-setting">
+            <div class="print-setting-label">部数</div>
+            <div class="print-setting-value">必要数</div>
+          </div>
+        </div>
+        <div class="print-hint">
+          <strong>ポイント：</strong>両面印刷は必ず<strong>「短辺とじ」</strong>を選択ください。「長辺とじ」だと裏面が上下逆に印刷されます。自動両面機能がない場合は、片面印刷後に用紙を裏返して手差し印刷してください。
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: FOLD -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">三つ折りにする<small>巻三つ折り／折り線は印刷済み</small></div>
+        <div class="fold-visual">
+          <div class="fold-paper" aria-label="印刷されたA4用紙（表面）">
+            <div class="fold-panel">
+              <span class="fold-panel-num">③</span>
+              <span class="fold-panel-label">裏表紙</span>
+              <span class="fold-panel-sub">お問合せ</span>
+            </div>
+            <div class="fold-panel">
+              <span class="fold-panel-num">②</span>
+              <span class="fold-panel-label">フラップ</span>
+              <span class="fold-panel-sub">代表挨拶</span>
+            </div>
+            <div class="fold-panel">
+              <span class="fold-panel-num">①</span>
+              <span class="fold-panel-label">表紙</span>
+              <span class="fold-panel-sub">ロゴ</span>
+            </div>
+          </div>
+          <div class="fold-arrow" aria-hidden="true">→</div>
+          <div class="fold-result">
+            <div class="fold-result-title">完成</div>
+            <div class="fold-result-sub">表紙が<br>一番上</div>
+          </div>
+        </div>
+        <div class="fold-caption">
+          <strong>折り順：</strong>①表紙パネルを中央に折り込む → ③裏表紙パネルを上から重ねるように折る。折り線に沿って、定規や爪でしっかり折り目をつけてください。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- USECASES: 配布シーン提案 -->
+  <section class="usecases">
+    <div class="usecases-header">
+      <div class="usecases-title">こんな場面でお渡しください</div>
+      <div class="usecases-lead">ご利用者様・ご家族様の「移動のお困りごと」が見えた時が、パンフレットをお渡しする絶好のタイミングです。</div>
+    </div>
+    <div class="usecase-grid">
+      <div class="usecase-item">
+        <div class="usecase-icon">🏥</div>
+        <div class="usecase-title">退院前<br>カンファレンス</div>
+        <div class="usecase-desc">退院後の通院・通所の送迎手段として</div>
+      </div>
+      <div class="usecase-item">
+        <div class="usecase-icon">👥</div>
+        <div class="usecase-title">通院同行の<br>ご相談時</div>
+        <div class="usecase-desc">付き添い・院内介助のご要望に</div>
+      </div>
+      <div class="usecase-item">
+        <div class="usecase-icon">🌸</div>
+        <div class="usecase-title">外出・旅行の<br>ご相談時</div>
+        <div class="usecase-desc">冠婚葬祭・墓参・お花見などに</div>
+      </div>
+      <div class="usecase-item">
+        <div class="usecase-icon">📋</div>
+        <div class="usecase-title">ケアプラン<br>更新・見直し時</div>
+        <div class="usecase-desc">新規サービスのご提案材料に</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="sheet-footer">
+    <div class="footer-contact">
+      <div>
+        <div class="footer-contact-title">CONTACT ／ お問い合わせ</div>
+        <div class="footer-contact-phone">☎ 070-9017-6085</div>
+        <div class="footer-contact-hours">受付時間 6:00〜22:00 ／ LINE 24時間365日</div>
+      </div>
+      <div class="footer-line">
+        <div class="footer-line-label">LINE</div>
+        <div class="footer-line-value">24h 365日</div>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>あさタクシー ／ 代表 平田 隼己</span>
+      <span>ご不明点は上記までお気軽にご連絡ください</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

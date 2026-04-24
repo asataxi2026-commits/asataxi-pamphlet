@@ -223,22 +223,17 @@
     }
 
     .cover-contact-phone {
-      font-size: 18pt;
-      font-weight: 700;
-      margin-bottom: 0.5mm;
+      font-size: 22pt;
+      font-weight: 900;
+      margin-bottom: 1mm;
+      letter-spacing: 0.02em;
     }
 
     .cover-contact-hours {
-      font-size: 8pt;
-      opacity: 0.9;
-      white-space: nowrap;
-    }
-
-    .cover-contact-line {
       font-size: 10pt;
-      color: #90EE90;
-      margin-top: 0.5mm;
-      font-weight: 700;
+      opacity: 0.95;
+      white-space: nowrap;
+      font-weight: 500;
     }
 
     /* ==================== PANEL 5: FLAP ==================== */
@@ -247,6 +242,14 @@
       flex-direction: column;
       padding: 3mm;
     }
+
+    /* プリンタの印刷不可領域を避けるため、外側端のパネルは外側に余白を多めに確保 */
+    /* Page 1 outside: [back | flap | cover], Page 2 inside: [services | pricing | flow] */
+    .page-outside .panel-back { padding-left: 6mm; }
+    .page-inside .panel-services { padding-left: 6mm; }
+    .page-outside .panel-cover .cover-body,
+    .page-outside .panel-cover .cover-photo-overlay { padding-right: 6mm; }
+    .page-inside .panel-flow { padding-right: 6mm; }
 
     .flap-header {
       text-align: center;
@@ -1131,7 +1134,7 @@
       <div class="cover-features">
         <div class="cover-feature">
           <div class="cover-feature-icon orange">✦</div>
-          <span>PTの資格を持つドライバーが対応</span>
+          <span>理学療法士のドライバーが対応</span>
         </div>
         <div class="cover-feature">
           <div class="cover-feature-icon green">✦</div>
@@ -1154,7 +1157,6 @@
       <div class="cover-contact">
         <div class="cover-contact-phone">☎ 070-9017-6085</div>
         <div class="cover-contact-hours">電話受付 6:00〜22:00 ／ LINE受付 24時間365日</div>
-        <div class="cover-contact-line">asataxi.jp</div>
       </div>
     </div>
   </div>
